@@ -16,7 +16,7 @@ async def fetch_merchant_order(client, uuid):
   return merchant_data.get('emailid'), merchant_data.get('Custom Field1')
 
 @app.get("/hook/")
-async def test_hook(status: int, uuid):
+async def hook(status: int, uuid):
   if status >= config.confirmations:
     async with httpx.AsyncClient() as client:
       customer_email, ghost_url = await fetch_merchant_order(client, uuid)
