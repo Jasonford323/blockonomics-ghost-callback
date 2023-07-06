@@ -5,9 +5,9 @@ from datetime import datetime as date
 class JwtUtil():
 
   @staticmethod
-  def gen_jwt():
+  def gen_jwt(ghost_admin_api_key):
     # Create JWT token from Ghost Admin API key
-    kid, secret = config.ghost_admin_apikey.split(':')
+    kid, secret = ghost_admin_api_key.split(':')
 
     iat = int(date.now().timestamp())
     header = {'alg': 'HS256', 'typ': 'JWT', 'kid': kid}
