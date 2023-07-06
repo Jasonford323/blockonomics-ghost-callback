@@ -17,7 +17,7 @@ async def fetch_merchant_order(client, uuid, blockonomics_api_key):
   return merchant_data.get('emailid'), merchant_data.get('Custom Field1')
 
 @app.get("/hook/{keys}")
-async def hook(status: int, uuid):
+async def hook(keys, status: int, uuid):
   if status >= config.confirmations:
     async with httpx.AsyncClient() as client:
       blockonomics_api_key, ghost_admin_api_key = utils.decode_base64(keys).split('-')
