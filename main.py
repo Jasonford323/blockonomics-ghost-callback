@@ -20,7 +20,7 @@ async def fetch_merchant_order(client, uuid, blockonomics_api_key):
 async def hook(keys, status: int, uuid):
   if status >= config.confirmations:
     async with httpx.AsyncClient() as client:
-      blockonomics_api_key, ghost_admin_api_key = utils.decode_base64(keys).split('-')
+      blockonomics_api_key, ghost_admin_api_key = utils.decrypt_api_keys(keys).split('-')
       customer_email, ghost_url = await fetch_merchant_order(client, uuid, blockonomics_api_key)
       token = JwtUtil.gen_jwt(ghost_admin_api_key)
       headers = {
